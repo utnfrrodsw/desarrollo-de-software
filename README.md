@@ -26,14 +26,14 @@ Repo con información general de la cátedra
 
 ### Regularidad
 La regularidad de la materia se alcanza con 60% de la sumatoria de puntos de las actividades de regularidad:
-| Actividad                           | Puntaje |
-|-------------------------------------|:-------:|
-| TP desarrollo de Backend (TPBack)   | 50      |
-| TP desarrollo de Frontend (TPFront) | 50      |
-| Prueba de Concepto (PoC)            | 30      |
-| Evaluación parcial (Parcial)        | 20      |
-| Total                               | 150     |
-| Necesario para regularidad (60%)    | 90      |
+| Actividad                                                  | Puntaje |
+|------------------------------------------------------------|:-------:|
+| TP desarrollo de Backend (TPBack) alcance de regularidad   | 50      |
+| TP desarrollo de Frontend (TPFront) alcance de regularidad | 50      |
+| Prueba de Concepto (PoC)                                   | 30      |
+| Evaluación parcial (Parcial)                               | 20      |
+| Total                                                      | 150     |
+| Necesario para regularidad (60%)                           | 90      |
 
 ¿Cómo calcular su puntaje?
 
@@ -57,8 +57,10 @@ La regularidad de la materia se alcanza con 60% de la sumatoria de puntos de las
 
 ### Aprobación directa
 La aprobación directa se alcanza con el 60% de los puntos de las actividades de aprobación:
-|Actividad|Puntaje|
-|:-|:-:|
+| Actividad                                       | Puntaje |
+|-------------------------------------------------|:-------:|
+| TP desarrollo de Backend alcance de aprobación  | 50      |
+| TP desarrollo de Frontend alcance de aprobación | 50      |
 
 ### Instancias de recuperatorio y globalizador
 **CADA** actividad tiene su propio recuperatorio y globalizador. Esto significa que en caso de presentarse al globalizador de la evaluación parcial y aprobarlo no asegura regularizar la materia. Deberá reemplazarse la nota del parcial en la formula anterior y calcular.
