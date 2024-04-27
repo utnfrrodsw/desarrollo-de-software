@@ -2,16 +2,16 @@
 Repo con información general de la cátedra
 
 ## Media
-* [Canal de Youtube](youtube.com/@dsw-utn).
+* [Canal de Youtube](https://www.youtube.com/@dsw-utn).
 * [Grupo de Telegram](https://bit.ly/dsw-telegram). Una vez unido se recomienda silenciar los topics de las comisiones a las que no pertenece y solo dejar activos el de su comisión y año, General, TP y PoC.
 * Repos:
-    * [TP](github.com/utnfrrodsw/tp)
-    * [PoC](github.com/utnfrrodsw/poc)
+    * [TP](https://www.github.com/utnfrrodsw/tp)
+    * [PoC](https://www.github.com/utnfrrodsw/poc)
     * Material de Back-end:
         * [Youtube playlist](https://youtube.com/playlist?list=PLstUYTrWtZx0Vv18QId7UHN5h2trJwUlD&si=qOkk08s4u49a_z68)
-        * [Código Fuente](github.com/utnfrrodsw/material-be) de los videos
-        * [Material teórico](github.com/utnfrrodsw/clases) escrito
-        * [Temario](github.com/utnfrrodsw/clases/blob/main/backend/topics.md)
+        * [Código Fuente](https://www.github.com/utnfrrodsw/material-be) de los videos
+        * [Material teórico](https://www.github.com/utnfrrodsw/clases) escrito
+        * [Temario](https://www.github.com/utnfrrodsw/clases/blob/main/backend/topics.md)
 
 ## Profesores
 * Bressano, Mario
