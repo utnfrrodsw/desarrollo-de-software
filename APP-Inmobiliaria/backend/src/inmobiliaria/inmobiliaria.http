@@ -1,0 +1,40 @@
+### obtener todos los inmobiliaria
+GET http://localhost:3000/api/inmobiliarias
+
+
+### obtener un inmobiliaria
+GET http://localhost:3000/api/inmobiliarias/1
+
+### crear un nuevo inmobiliaria
+POST http://localhost:3000/api/inmobiliarias
+Content-Type: application/json
+
+{
+    "cuit": "30462950917",
+    "nombre": "Casa S.A",
+    "direccion": "calle falsa 123",
+    "email": "pepe@gmail.com",
+    "telefono": "341222342"
+}
+### modificar un inmobiliaria (PUT - recurso completo e idempotente)
+PUT http://localhost:3000/api/inmobiliarias/2
+Content-Type: application/json
+
+{
+    "nombre": "Sinergia",
+    "direccion": "calle falsa 123",
+    "email": "joseluis@hotmail.com",
+    "telefono": "341222342"
+}
+
+### modificar un inmobiliaria (PATCH - recurso parcial)
+PATCH http://localhost:3000/api/inmobiliarias/2
+Content-Type: application/json
+
+{
+    "email": "pepe@gmail.com",
+    "telefono": "341222342"
+}
+
+### borrar un inmobiliaria
+DELETE http://localhost:3000/api/inmobiliarias/2
