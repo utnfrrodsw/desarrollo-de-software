@@ -5,3 +5,6 @@ export class AgenteInmobiliario {
     public inmobiliariaCuit: string // Relación con inmobiliaria
   ) {}
 }
+
+//renombrar archivo  agenteinmobiliario.entity.ts a agenteinmobiliario.mem.ts
+//borrar el dist
