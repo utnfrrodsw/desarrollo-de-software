@@ -20,9 +20,9 @@
 
 ### '...'
 
-Our real estate agency specializes in property rentals, offering comprehensive services for both property owners and tenants. We operate in various areas of the city and its surroundings, managing a wide range of properties including apartments, houses, offices, and commercial spaces. We handle the entire rental process—from property listing, responding to inquiries, organizing viewings, and screening potential tenants, to drafting and signing lease agreements.
+Nuestra agencia inmobiliaria se especializa en alquileres de propiedades, ofreciendo servicios integrales tanto para propietarios como para inquilinos. Operamos en diversas zonas de la ciudad y sus alrededores, gestionando una amplia variedad de inmuebles que incluyen departamentos, casas, oficinas y locales comerciales. Nos encargamos de todo el proceso de alquiler: desde la publicación de las propiedades, la atención de consultas, la organización de visitas y la selección de posibles inquilinos, hasta la redacción y firma de contratos de arrendamiento.
 
-Through a modern and user-friendly online system, clients can access an up-to-date catalog of available properties, filter listings according to their needs, and request viewings. Property owners can rely on us for full management of their assets, including monthly rent collection, contract administration, and handling of tenant requests.
+A través de un sistema en línea moderno y fácil de usar, los clientes pueden acceder a un catálogo actualizado de propiedades disponibles, filtrar las publicaciones según sus necesidades y solicitar visitas. Los propietarios pueden confiar en nosotros para la gestión completa de sus inmuebles, incluyendo la cobranza mensual del alquiler, la administración de contratos y la atención de solicitudes por parte de los inquilinos.
 
 
 
