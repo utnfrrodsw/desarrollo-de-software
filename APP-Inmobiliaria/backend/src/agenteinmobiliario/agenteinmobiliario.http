@@ -1,0 +1,26 @@
+### obtener todos los agentes
+GET http://localhost:3000/api/agentes
+
+### obtener un agente
+GET http://localhost:3000/api/agentes/1
+
+### crear un nuevo agente
+POST http://localhost:3000/api/agentes
+Content-Type: application/json
+
+{
+    "nombre": "Juan Pérez",
+    "inmobiliariaCuit": "30462950917"
+}
+
+### modificar un agente
+PUT http://localhost:3000/api/agentes/1
+Content-Type: application/json
+
+{
+    "nombre": "Juan Pérez",
+    "inmobiliariaCuit": "30462950917"
+}
+
+### borrar un agente
+DELETE http://localhost:3000/api/agentes/1

@@ -1,0 +1,32 @@
+### obtener todas las propiedades
+GET http://localhost:3000/api/propiedades
+
+### obtener una propiedad
+GET http://localhost:3000/api/propiedades/1
+
+### crear una nueva propiedad
+POST http://localhost:3000/api/propiedades
+Content-Type: application/json
+
+{
+    "direccion": "Av. Siempre Viva 742",
+    "precio": 150000,
+    "estado": "disponible",
+    "tipoPropiedadId": "1",
+    "inmobiliariaCuit": "30462950917"
+}
+
+### modificar una propiedad
+PUT http://localhost:3000/api/propiedades/1
+Content-Type: application/json
+
+{
+    "direccion": "Av. Siempre Viva 742",
+    "precio": 160000,
+    "estado": "reservada",
+    "tipoPropiedadId": "1",
+    "inmobiliariaCuit": "30462950917"
+}
+
+### borrar una propiedad
+DELETE http://localhost:3000/api/propiedades/1
