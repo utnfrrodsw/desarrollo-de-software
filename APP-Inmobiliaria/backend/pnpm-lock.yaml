@@ -8,6 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@mikro-orm/core':
+        specifier: ^6.4.16
+        version: 6.4.16
+      '@mikro-orm/mongo-highlighter':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@mikro-orm/mongodb':
         specifier: 6.4.16
         version: 6.4.16(@mikro-orm/core@6.4.16)
@@ -36,6 +42,10 @@ packages:
   '@mikro-orm/core@6.4.16':
     resolution: {integrity: sha512-BW/My1VlI0R25Eojdh0UiET8J+mEruThksGVfllEnjJQ0uwGs3mm/TbMclv0g+d7Qp4+mpzDQU4+lIo8okHYsw==}
     engines: {node: '>= 18.12.0'}
+
+  '@mikro-orm/mongo-highlighter@1.0.0':
+    resolution: {integrity: sha512-pPb/f1TKDBbJ8fH6Bbc5qMr/52edtA+vQrEKmuF3T7z9/feMrS6laW6FIpJXJJeP5sn0w4udjc/BIc4ntm4QHg==}
+    engines: {node: '>= 10.13.0'}
 
   '@mikro-orm/mongodb@6.4.16':
     resolution: {integrity: sha512-RvIvcKn96GkdsqGpSsq85fuvNQlDP+R0N2K6A49Q09jJYD4I0fsMCc0zQFpA5T44I08uIES6iWUGwYvogu3Zzg==}
@@ -100,6 +110,10 @@ packages:
   accepts@1.3.8:
     resolution: {integrity: sha512-PYAthTa2m2VKxuvSD3DPC/Gy+U+sOA1LAuT8mkmRuvw+NACSaeXEQ+NHcVF7rONl6qcaxV3Uuemwawk+7+SJLw==}
     engines: {node: '>= 0.6'}
+
+  ansi-colors@4.1.3:
+    resolution: {integrity: sha512-/6w/C21Pm1A7aZitlI5Ni/2J6FFQN8i1Cvz3kHABAAbw93v/NlvKdVOqz7CCWz/3iv/JplRSEEZ83XION15ovw==}
+    engines: {node: '>=6'}
 
   array-flatten@1.1.1:
     resolution: {integrity: sha512-PCVAQswWemu6UdxsDFFX/+gVeYqKAod3D3UVm91jHwynguOwAvYPhx8nNlM++NqRcK6CxxpUafjmhIdKiHibqg==}
@@ -615,6 +629,10 @@ snapshots:
       mikro-orm: 6.4.16
       reflect-metadata: 0.2.2
 
+  '@mikro-orm/mongo-highlighter@1.0.0':
+    dependencies:
+      ansi-colors: 4.1.3
+
   '@mikro-orm/mongodb@6.4.16(@mikro-orm/core@6.4.16)':
     dependencies:
       '@mikro-orm/core': 6.4.16
@@ -699,6 +717,8 @@ snapshots:
     dependencies:
       mime-types: 2.1.35
       negotiator: 0.6.3
+
+  ansi-colors@4.1.3: {}
 
   array-flatten@1.1.1: {}
 
