@@ -20,6 +20,8 @@
     "typescript": "5.1.3"
   },
   "dependencies": {
-    "express": "4.18.2"
+    "@mikro-orm/mongodb": "6.4.16",
+    "express": "4.18.2",
+    "reflect-metadata": "0.2.2"
   }
 }
