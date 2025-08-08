@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import express from 'express'
 import { clienteRouter } from './cliente/cliente.routes.js'
 import { tipopropiedadRouter } from './tipopropiedad/tipopropiedad.routes.js'
@@ -5,7 +6,7 @@ import { inmobiliariaRouter } from './inmobiliaria/inmobiliaria.routes.js'
 import { tipoDocumentacionRouter } from './tipodocumentacion/tipodocumentacion.routes.js'
 import { propiedadRouter } from './propiedad/propiedad.routes.js'
 import { agenteinmobiliarioRouter } from './agenteinmobiliario/agenteinmobiliario.routes.js'
-import { orm } from './shared/db/orm.js'
+import { orm, syncSchema } from './shared/db/orm.js'
 import { RequestContext } from '@mikro-orm/core'
 
 
@@ -30,7 +31,8 @@ app.use((_, res) => {
   return res.status(404).send({ message: 'Resource not found' })
 })
 
-//await syncSchema() 
+await syncSchema() //never in production
+
 
 app.listen(3000, () => {
   console.log('Server runnning on http://localhost:3000/')

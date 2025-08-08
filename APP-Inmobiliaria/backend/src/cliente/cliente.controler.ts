@@ -41,7 +41,7 @@ async function findOne(req: Request, res: Response) {
     const id = req.params.id
     const cliente = await em.findOneOrFail(
       Cliente,
-      { id }
+      { id: Number(id) }
     )
     res.status(200).json({ message: 'found cliente', data: cliente })
   } catch (error: any) {
@@ -65,7 +65,7 @@ async function add(req: Request, res: Response) {
 async function update(req: Request, res: Response) {
   try {
     const id = req.params.id
-    const clienteToUpdate = await em.findOneOrFail(Cliente, { id })
+    const clienteToUpdate = await em.findOneOrFail(Cliente, { id: Number(id) })
     em.assign(clienteToUpdate, req.body.sanitizedInput)
     await em.flush()
     res
@@ -80,8 +80,9 @@ async function update(req: Request, res: Response) {
 async function remove(req: Request, res: Response) {
   try {
     const id = req.params.id
-    const cliente = em.getReference(Cliente, id)
+    const cliente = em.getReference(Cliente, Number(id))
     await em.removeAndFlush(cliente)
+    res.status(200).json({ message: 'cliente deleted' })
   } catch (error: any) {
     res.status(500).json({ message: error.message })
   }
