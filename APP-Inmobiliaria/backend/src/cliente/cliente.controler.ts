@@ -15,6 +15,7 @@ function sanitizeClienteInput(req: Request, res: Response, next: NextFunction) {
   }
   //more checks here
 
+
   Object.keys(req.body.sanitizedInput).forEach((key) => {
     if (req.body.sanitizedInput[key] === undefined) {
       delete req.body.sanitizedInput[key]

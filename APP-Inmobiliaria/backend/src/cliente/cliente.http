@@ -1,41 +1,54 @@
 ### obtener todos los cliente
 GET http://localhost:3000/api/clientes
 
-
-### obtener un cliente
-GET http://localhost:3000/api/clientes/1
-
 ### crear un nuevo cliente
+# @name createCliente
 POST http://localhost:3000/api/clientes
 Content-Type: application/json
 
 {
     "nombre": "pepe",
     "apellido": "pepe",
-    "mail": "pepe@gmail.com",
-    "telefono": "341222342",
-    "id": "2"
+    "tipo_documento": "DNI",
+    "nro_doc": 46295231,
+    "direccion": "Mendoza 3122",
+    "telefono": "3412223242",
+    
 }
+
+### ID
+@id = {{createCliente.response.body.data.id}}
+
+
+
+### obtener un cliente
+GET http://localhost:3000/api/clientes/{{id}}
+
 ### modificar un cliente (PUT - recurso completo e idempotente)
-PUT http://localhost:3000/api/clientes/2
+PUT http://localhost:3000/api/clientes/{{id}}
 Content-Type: application/json
 
 {
-    "nombre": "pepe",
-    "apellido": "pepe",
-    "mail": "joseluis@hotmail.com",
-    "telefono": "341222342",
-    "id": "2"
+    "direccion": "San Luis 2010",
+    "telefono": "3413387632",
 }
 
-### modificar un cliente (PATCH - recurso parcial)
-PATCH http://localhost:3000/api/clientes/2
+# @name createClienteToDelete
+#POST2
+POST http://localhost:3000/api/clientes
 Content-Type: application/json
 
 {
-    "nombre": "pepe",
-    "apellido": "jose"
+    "nombre": "Jose",
+    "apellido": "Luis",
+    "tipo_documento": "DNI",
+    "nro_doc": 18678093,
+    "direccion": "San juan 3412",
+    "telefono": "3412232343",
 }
+
 
 ### borrar un cliente
-DELETE http://localhost:3000/api/clientes/2
+
+@idToDelete = {{createClienteToDelete.response.body.data.id}}
+DELETE http://localhost:3000/api/clientes/[{idToDelete}]

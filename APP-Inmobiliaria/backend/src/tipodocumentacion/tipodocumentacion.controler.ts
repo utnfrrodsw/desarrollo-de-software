@@ -1,51 +1,69 @@
 import { Request, Response, NextFunction } from 'express';
-import { TipoDocumentacionRepository } from './tipodocumentacion.repository.js';
 import { TipoDocumentacion } from './tipodocumentacion.entity.js';
+import { orm } from '../shared/db/orm.js';
 
-const repository = new TipoDocumentacionRepository();
+const em = orm.em;
 
-function sanitizeTipoDocumentacionInput(req: Request, res: Response, next: NextFunction) {
+async function sanitizeTipoDocumentacionInput(req: Request, res: Response, next: NextFunction) {
   req.body.sanitizedInput = {
     nombre: req.body.nombre,
     descripcion: req.body.descripcion,
+    fechaVencimiento: req.body.fechaVencimiento,
   };
   next();
 }
 
-function findAll(req: Request, res: Response) {
-  res.json({ data: repository.findAll() });
+async function findAll(req: Request, res: Response) {
+  try {
+    const tipos = em.find(TipoDocumentacion, {});
+    res.status(200).json({ message: 'found all tipos de documentacion', data: tipos });
+  } catch (error: any) {
+    res.status(500).json({ message: error.message });
+    
+  }
 }
 
-function findOne(req: Request, res: Response) {
-  const id = req.params.id;
-  const tipo = repository.findOne({ id });
-  if (!tipo) return res.status(404).send({ message: 'TipoDocumentacion not found' });
-  res.json({ data: tipo });
+async function findOne(req: Request, res: Response) {
+  try {
+    const id = req.params.id;
+    const tipo = em.findOneOrFail(TipoDocumentacion, { id: Number(id) });
+    res.status(200).json({ message: 'found tipo de documentacion', data: tipo });
+  } catch (error:any) {
+    res.status(500).json({ message: error.message });
+  }
 }
 
-function add(req: Request, res: Response) {
-  const input = req.body.sanitizedInput;
-  const tipo = new TipoDocumentacion(
-    Math.random().toString(36).substring(2, 9),
-    input.nombre,
-    input.descripcion
-  );
-  repository.add(tipo);
-  return res.status(201).send({ message: 'TipoDocumentacion created', data: tipo });
+async function add(req: Request, res: Response) {
+  try {
+    const tipo = em.create(TipoDocumentacion, req.body.sanitizedInput);
+    await em.flush();
+    res.status(201).json({ message: 'tipo de documentacion created', data: tipo });
+  } catch (error:any) {
+    res.status(500).json({ message: error.message });
+  }
 }
 
-function update(req: Request, res: Response) {
-  req.body.sanitizedInput.id = req.params.id;
-  const tipo = repository.update(req.body.sanitizedInput);
-  if (!tipo) return res.status(404).send({ message: 'TipoDocumentacion not found' });
-  return res.status(200).send({ message: 'TipoDocumentacion updated', data: tipo });
+async function update(req: Request, res: Response) {
+  try {
+    const id = req.params.id;
+    const tipoToUpdate = await em.findOneOrFail(TipoDocumentacion, { id: Number(id) });
+    em.assign(tipoToUpdate, req.body.sanitizedInput);
+    await em.flush();
+    res.status(200).json({ message: 'tipo de documentacion updated', data: tipoToUpdate });
+  } catch (error:any) {
+    res.status(500).json({ message: error.message });
+  }
 }
 
-function remove(req: Request, res: Response) {
-  const id = req.params.id;
-  const tipo = repository.delete({ id });
-  if (!tipo) return res.status(404).send({ message: 'TipoDocumentacion not found' });
-  res.status(200).send({ message: 'TipoDocumentacion deleted' });
+async function remove(req: Request, res: Response) {
+  try {
+    const id = req.params.id;
+    const tipoToRemove = await em.findOneOrFail(TipoDocumentacion, { id: Number(id) });
+    await em.removeAndFlush(tipoToRemove);
+    res.status(200).json({ message: 'tipo de documentacion removed', data: tipoToRemove });
+  } catch (error:any) {
+    res.status(500).json({ message: error.message });
+  }
 }
 
 export { sanitizeTipoDocumentacionInput, findAll, findOne, add, update, remove };

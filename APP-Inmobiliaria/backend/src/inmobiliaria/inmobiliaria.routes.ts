@@ -7,7 +7,6 @@ inmobiliariaRouter.get('/', findAll)
 inmobiliariaRouter.get('/:id', findOne)
 inmobiliariaRouter.post('/', sanitizeInmobiliariaInput, add)
 inmobiliariaRouter.put('/:id', sanitizeInmobiliariaInput, update)
-inmobiliariaRouter.patch('/:id', sanitizeInmobiliariaInput, update)
 inmobiliariaRouter.delete('/:id', remove)
 inmobiliariaRouter.delete('/', (req, res) => {
   res.status(405).send('Method Not Allowed')

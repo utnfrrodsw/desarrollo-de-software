@@ -1,15 +1,13 @@
 import { Request, Response, NextFunction } from 'express'
-import { InmobiliariaRepository } from './inmobiliaria.repository.js'
 import { Inmobiliaria } from './inmobiliaria.entity.js'
+import { orm } from '../shared/db/orm.js'
 
-const repository = new InmobiliariaRepository()
+const em = orm.em
 
 function sanitizeInmobiliariaInput(req: Request, res: Response, next: NextFunction) {
   req.body.sanitizedInput = {
-    cuit: req.body.cuit,
     nombre: req.body.nombre,
     direccion: req.body.direccion,
-    email: req.body.email,
     telefono: req.body.telefono,
   }
   //more checks here
@@ -22,53 +20,55 @@ function sanitizeInmobiliariaInput(req: Request, res: Response, next: NextFuncti
   next()
 }
 
-function findAll(req: Request, res: Response) {
-  res.json({ data: repository.findAll() })
-}
-
-function findOne(req: Request, res: Response) {
-  const id = req.params.id
-  const inmobiliaria = repository.findOne({ id })
-  if (!inmobiliaria) {
-    return res.status(404).send({ message: 'inmobiliaria not found' })
+async function findAll(req: Request, res: Response) {
+  try {
+    const inmobiliarias = em.find(Inmobiliaria, {})
+    res.status(200).json({ message: 'found all inmobiliarias', data: inmobiliarias })
+  } catch (error:any) {
+    res.status(500).json({ message: error.message })
   }
-  res.json({ data: inmobiliaria })
 }
 
-function add(req: Request, res: Response) {
-  const input = req.body.sanitizedInput
-
-  const inmobiliariaInput = new Inmobiliaria(
-    input.cuit,
-    input.nombre,
-    input.direccion,
-    input.email,
-    input.telefono
-  )
-
-  const inmobiliaria = repository.add(inmobiliariaInput)
-  return res.status(201).send({ message: 'inmobiliaria created', data: inmobiliaria })
-}
-
-function update(req: Request, res: Response) {
-  req.body.sanitizedInput.id = req.params.id
-  const inmobiliaria = repository.update(req.body.sanitizedInput)
-
-  if (!inmobiliaria) {
-    return res.status(404).send({ message: 'inmobiliaria not found' })
+async function findOne(req: Request, res: Response) {
+  try {
+    const id = req.params.id
+    const inmobiliaria = await em.findOneOrFail(Inmobiliaria, { id: Number(id) })
+    res.status(200).json({ message: 'found inmobiliaria', data: inmobiliaria })
+  } catch (error:any) {
+    res.status(500).json({ message: error.message })
   }
-
-  return res.status(200).send({ message: 'inmobiliaria updated successfully', data: inmobiliaria })
 }
 
-function remove(req: Request, res: Response) {
-  const id = req.params.id
-  const inmobiliaria = repository.delete({ id })
+async function add(req: Request, res: Response) {
+  try {
+    const cliente = em.create(Inmobiliaria, req.body.sanitizedInput)
+    await em.flush()
+    res.status(201).json({ message: 'inmobiliaria created', data: cliente })
+  } catch (error:any) {
+    res.status(500).json({ message: error.message })
+  }
+}
 
-  if (!inmobiliaria) {
-    res.status(404).send({ message: 'inmobiliaria not found' })
-  } else {
-    res.status(200).send({ message: 'inmobiliaria deleted successfully' })
+async function update(req: Request, res: Response) {
+  try {
+    const id = req.params.id
+    const inmobiliariaToUpdate = await em.findOneOrFail(Inmobiliaria, { id: Number(id) })
+    em.assign(inmobiliariaToUpdate, req.body.sanitizedInput)
+    await em.flush()
+    res.status(200).json({ message: 'inmobiliaria updated', data: inmobiliariaToUpdate })
+  } catch (error:any) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+async function remove(req: Request, res: Response) {
+  try {
+    const id = req.params.id
+    const inmobiliaria = await em.findOneOrFail(Inmobiliaria, { id: Number(id) })
+    await em.removeAndFlush(inmobiliaria)
+    res.status(200).json({ message: 'inmobiliaria deleted' })
+  } catch (error:any) {
+    res.status(500).json({ message: error.message })
   }
 }
 

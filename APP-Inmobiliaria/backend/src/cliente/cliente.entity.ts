@@ -3,11 +3,11 @@ import {
   Property,
   ManyToMany,
   Cascade,
-  ManyToOne,
-  Rel,
   Collection,
 } from '@mikro-orm/core'
 import { BaseEntity } from '../shared/db/baseEntity.entity.js'
+import { TipoDocumentacion } from '../tipodocumentacion/tipodocumentacion.entity.js'
+import { Inmobiliaria } from '../inmobiliaria/inmobiliaria.entity.js'
 
 @Entity()
 export class Cliente extends BaseEntity {
@@ -18,11 +18,22 @@ export class Cliente extends BaseEntity {
     apellido!:string
 
     @Property({nullable: false})
-    mail!:string
+    tipo_documento!:string
 
     @Property({nullable: false})
-    telefono!:string
+    nro_doc!:number
 
+    @Property({nullable: false})
+    telefono!:number
+
+    @Property({nullable: false})
+    direccion!:string
+
+    @ManyToMany(() => TipoDocumentacion, tipo_doc => tipo_doc.clientes, { cascade: [Cascade.ALL] })
+    documentaciones = new Collection<TipoDocumentacion>(this);
+
+    @ManyToMany(() => Inmobiliaria, inmobiliaria => inmobiliaria.clientes, { cascade: [Cascade.ALL] })
+    inmobiliarias = new Collection<Inmobiliaria>(this);
 }
     
     /*constructor(
