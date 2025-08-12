@@ -28,7 +28,8 @@ async function findAll(req: Request, res: Response) {
   try {
     const clientes = await em.find(
       Cliente,
-      {}
+      {},
+      { populate: ['documentaciones'] }
     )
     res.status(200).json({ message: 'found all clientes', data: clientes })
   } catch (error: any) {
@@ -43,6 +44,7 @@ async function findOne(req: Request, res: Response) {
     const cliente = await em.findOneOrFail(
       Cliente,
       { id: Number(id) }
+      , { populate: ['documentaciones'] }
     )
     res.status(200).json({ message: 'found cliente', data: cliente })
   } catch (error: any) {

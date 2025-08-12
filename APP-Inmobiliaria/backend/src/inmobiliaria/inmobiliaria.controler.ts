@@ -22,7 +22,7 @@ function sanitizeInmobiliariaInput(req: Request, res: Response, next: NextFuncti
 
 async function findAll(req: Request, res: Response) {
   try {
-    const inmobiliarias = em.find(Inmobiliaria, {})
+    const inmobiliarias = em.find(Inmobiliaria, {}, {populate: ['clientes']})
     res.status(200).json({ message: 'found all inmobiliarias', data: inmobiliarias })
   } catch (error:any) {
     res.status(500).json({ message: error.message })
@@ -32,7 +32,7 @@ async function findAll(req: Request, res: Response) {
 async function findOne(req: Request, res: Response) {
   try {
     const id = req.params.id
-    const inmobiliaria = await em.findOneOrFail(Inmobiliaria, { id: Number(id) })
+    const inmobiliaria = await em.findOneOrFail(Inmobiliaria, { id: Number(id) }, {populate: ['clientes']})
     res.status(200).json({ message: 'found inmobiliaria', data: inmobiliaria })
   } catch (error:any) {
     res.status(500).json({ message: error.message })
