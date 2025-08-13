@@ -2,7 +2,7 @@
 
 
 
-## TEAM MEMBERS
+## MIEMBROS
 * 50252 - Tomás Nahuel Suárez
 * 52960 - Lautaro Goyoaga
 * 52977 - Felipe Bentancour
@@ -16,7 +16,7 @@
 
 
 
-## OVERVIEW
+## Vision General
 
 ### '...'
 
@@ -31,10 +31,10 @@ A través de un sistema en línea moderno y fácil de usar, los clientes pueden 
 
 
 
-## FUNCTIONAL SCOPE
+## ALCANCE FUNCIONAL
 
-### MINIMUM SCOPE
-Requirements for Regularity:
+### ALCANCE MINIMO
+Requisitos para la regularidad:
 |Req|Detail|
 |:-|:-|
   |Simple CRUD|1. CRUD-Cliente<br>2. CRUD-TipoPropiedad<br>3. CRUD-Inmobiliaria<br>4. CRUD-TipoDocumentacion|
@@ -43,14 +43,14 @@ Requirements for Regularity:
 |CUU / EPIC|1. Reservar una propiedad mediante una seña<br>2. Agendar visita|
 
 
-### ADDITIONAL SCOPE
-Requirements for AD:
+### ALCANCE ADICIONAL
+Requisitos para AD:
 |Req|Detail|
 |:-|:-|
 |CUU/Epic|1. Registrar un pago de alquiler<br>2. Confirmar alquiler|
 
 
-### VOLUNTARY ADDITIONAL FUNCTIONAL SCOP
+### ALCANCE FUNCIONAL ADICIONAL VOLUNTARIO
 |Req|Detail|
 |:-|:-|
 |Listados |1. Listado de propiedades más vistas|
