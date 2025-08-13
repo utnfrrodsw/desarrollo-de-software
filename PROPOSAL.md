@@ -26,8 +26,8 @@ A través de un sistema en línea moderno y fácil de usar, los clientes pueden 
 
 
 
-## MODEL OR CLASESS DIAGRAM
-* https://drive.google.com/file/d/1LIt04DcUZPJjcmk4pFcEN-Hz-9-4sP1d/view?usp=sharing
+## MODELO DE OBJETOS
+*  <img width="702" height="572" alt="Modelo de objetos APP-Inmobiliaria drawio" src="https://github.com/user-attachments/assets/551c1cf9-2931-407c-994b-514862f835dc" />
 
 
 
