@@ -21,4 +21,24 @@ export class AgenteInmobiliarioRepository {
   }
 
   async update(id: number, data: Partial<{ nombre: string; inmobiliariaCuit: string }>) {
-    const
+    const agente = await this.em.findOne(AgenteInmobiliario, { id });
+    if (!agente) return null;
+
+    if (data.nombre) agente.nombre = data.nombre;
+    if (data.inmobiliariaCuit) {
+      const inmobiliaria = await this.em.findOneOrFail(Inmobiliaria, { cuit: data.inmobiliariaCuit });
+      agente.inmobiliaria = inmobiliaria;
+    }
+
+    await this.em.flush();
+    return agente;
+  }
+
+  async delete(id: number) {
+    const agente = await this.em.findOne(AgenteInmobiliario, { id });
+    if (!agente) return null;
+
+    await this.em.removeAndFlush(agente);
+    return agente;
+  }
+}
