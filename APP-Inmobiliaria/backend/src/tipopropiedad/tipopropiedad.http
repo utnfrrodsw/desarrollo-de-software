@@ -1,0 +1,40 @@
+### obtener todos los tipos de propiedad
+GET http://localhost:3000/api/tipopropiedades/
+
+
+### obtener un tipo de propiedad por id
+GET http://localhost:3000/api/tipopropiedades/1
+
+### crear un nuevo tipo de propiedad
+POST http://localhost:3000/api/tipopropiedades
+Content-Type: application/json
+
+{
+    "nombre": "Casa",
+    "descripcion": "Una casa espaciosa",
+    "estado": "disponible",
+    "id": "1"
+}
+### modificar un tipo de propiedad (PUT - recurso completo e idempotente)
+PUT http://localhost:3000/api/tipopropiedades/2
+Content-Type: application/json
+
+{
+    "nombre": "Casa",
+    "descripcion": "Una casa espaciosa",
+    "estado": "disponible",
+    "id": "2"
+}
+
+### modificar un tipo de propiedad (PATCH - recurso parcial)
+PATCH http://localhost:3000/api/tipopropiedades/2
+Content-Type: application/json
+
+{
+    "nombre": "Casa",
+    "descripcion": "Una casa espaciosa",
+    "estado": "disponible"
+}
+
+### borrar un tipo de propiedad
+DELETE http://localhost:3000/api/tipopropiedades/2

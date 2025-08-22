@@ -1,0 +1,54 @@
+### obtener todos los cliente
+GET http://localhost:3000/api/clientes
+
+### crear un nuevo cliente
+# @name createCliente
+POST http://localhost:3000/api/clientes
+Content-Type: application/json
+
+{
+    "nombre": "pepe",
+    "apellido": "pepe",
+    "tipo_documento": "DNI",
+    "nro_doc": 46295231,
+    "direccion": "Mendoza 3122",
+    "telefono": "3412223242",
+    
+}
+
+### ID
+@id = {{createCliente.response.body.data.id}}
+
+
+
+### obtener un cliente
+GET http://localhost:3000/api/clientes/{{id}}
+
+### modificar un cliente (PUT - recurso completo e idempotente)
+PUT http://localhost:3000/api/clientes/{{id}}
+Content-Type: application/json
+
+{
+    "direccion": "San Luis 2010",
+    "telefono": "3413387632",
+}
+
+# @name createClienteToDelete
+#POST2
+POST http://localhost:3000/api/clientes
+Content-Type: application/json
+
+{
+    "nombre": "Jose",
+    "apellido": "Luis",
+    "tipo_documento": "DNI",
+    "nro_doc": 18678093,
+    "direccion": "San juan 3412",
+    "telefono": "3412232343",
+}
+
+
+### borrar un cliente
+
+@idToDelete = {{createClienteToDelete.response.body.data.id}}
+DELETE http://localhost:3000/api/clientes/[{idToDelete}]

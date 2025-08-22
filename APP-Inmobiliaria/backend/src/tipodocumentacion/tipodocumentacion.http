@@ -1,0 +1,26 @@
+### obtener todos los tipos de documentación
+GET http://localhost:3000/api/tipodocumentaciones
+
+### obtener un tipo de documentación
+GET http://localhost:3000/api/tipodocumentaciones/1
+
+### crear un nuevo tipo de documentación
+POST http://localhost:3000/api/tipodocumentaciones
+Content-Type: application/json
+
+{
+    "nombre": "DNI",
+    "descripcion": "Documento Nacional de Identidad"
+}
+
+### modificar un tipo de documentación
+PUT http://localhost:3000/api/tipodocumentaciones/1
+Content-Type: application/json
+
+{
+    "nombre": "Pasaporte",
+    "descripcion": "Documento de viaje internacional"
+}
+
+### borrar un tipo de documentación
+DELETE http://localhost:3000/api/tipodocumentaciones/1

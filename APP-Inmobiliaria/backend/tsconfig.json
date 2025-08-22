@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "target": "es2020",
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "alwaysStrict": true,
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": ["src/**/*", "**/*.ts"],
+  "exclude": ["node_modules"]
+}

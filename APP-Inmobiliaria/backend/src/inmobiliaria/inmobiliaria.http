@@ -1,0 +1,47 @@
+### obtener todos los inmobiliaria
+GET http://localhost:3000/api/inmobiliarias
+
+
+### crear un nuevo inmobiliaria
+# @name createInmobiliaria
+POST http://localhost:3000/api/inmobiliarias
+Content-Type: application/json
+
+{
+    "nombre": "Casa S.A",
+    "direccion": "Buenos aires 3402",
+    "telefono": "341222342",
+    "clientes": [1],
+}
+
+### ID
+@id = {{createInmobiliaria.response.body.data.id}}
+
+### obtener un cliente
+GET http://localhost:3000/api/clientes/{{id}}
+
+### modificar un inmobiliaria (PUT - recurso completo e idempotente)
+PUT http://localhost:3000/api/inmobiliarias/{{id}}
+Content-Type: application/json
+
+{
+    "nombre": "Fundar S.R.L",
+    "direccion": "Mitre 1234",
+}
+
+# @name createInmobiliariaToDelete
+#POST2
+POST http://localhost:3000/api/inmobiliarias
+Content-Type: application/json
+
+{
+    "nombre": "ENASA SA",
+    "direccion": "San Luis 3322",
+    "telefono": "341542316",
+    "clientes": [1],
+}
+
+
+### borrar un inmobiliaria
+@idToDelete = {{createInmobiliariaToDelete.response.body.data.id}}
+DELETE http://localhost:3000/api/inmobiliarias/{{id}}

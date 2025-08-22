@@ -1,0 +1,19 @@
+# Ignorar dependencias y carpetas generadas
+node_modules/
+dist/
+.env
+coverage/
+
+# VSCode y archivos temporales
+.vscode/
+.DS_Store
+Thumbs.db
+.history/
+*.vsix
+
+# Permitir algunos archivos específicos de VSCode
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets

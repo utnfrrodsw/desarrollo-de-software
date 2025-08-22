@@ -1,0 +1,13 @@
+# Ignorar archivos sensibles y propios de Docker
+.env
+docker-compose.yml
+mysql-data/
+
+# Node global
+node_modules/
+
+# Logs
+*.log
+
+# Editor config
+.vscode/
