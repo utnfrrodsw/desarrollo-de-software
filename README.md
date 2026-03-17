@@ -77,14 +77,14 @@ Los recuperatorios de los TP de desarrollo y de la PoC pueden ser otros enunciad
 
 Se sugieren las siguientes fechas para que los alumnos puedan cumplir en tiempo y forma con el trabajo requerido. 
 
-* 10/4 -> Entregar enunciado del TP de Desarrollo y elegir CRUD de siguiente entrega.
+* 10/4 -> Presentar enunciado del TP de Desarrollo y elegir CRUD de siguiente entrega.
 * 5/6 -> Desarrollar y entregar el código de 1 CRUD en back-end (en memoria, sin persistencia)
+* 26/6 -> Desaroolar boilerplate del front-end
 * 12/7 -> Desarrollar y entregar el código de 1 CRUD x integrante en back-end COMPLETO (con acceso a BD incluido)
-* 26/6 -> Entregar boilerplate del front-end
 * 31/7 -> Desarrollar y entregar el código un GET ALL desde el front-end al back-end ya desarrollado antes (listar múltiples elementos de una colección).
-* 21/8 -> Desarrollar y entregar 1 CRUD completo front-end + back-end (todas las operaciones de CRUD).
-* 11/9 -> Desarrollar y entregar todos los CRUD front-end + back-end con alcance de regularidad.
-* 30/10 ->  Terminar el TP de desarrollo front-end + backend con alcance de regularidad.
+* 14/8 -> Desarrollar y entregar 1 CRUD completo front-end + back-end (todas las operaciones de CRUD).
+* 4/9 -> Desarrollar y entregar todos los CRUD front-end + back-end con alcance de regularidad.
+* 9/10 ->  Terminar el TP de desarrollo front-end + backend con alcance de regularidad.
 * Antes del 13/11 -> Defensa del TP desarrollo.
 
 **POC**
