@@ -8,6 +8,16 @@ import { initialClubData, initialClubErrors } from './ClubForm.data'
 import { getClub } from './ClubForm.server'
 import type { Club, CreateClubDto } from '../../../types/club'
 
+// El club de la API trae null y number; los inputs controlados manejan
+// sólo strings. Esta conversión hace falta al precargar desde el state
+// y desde la request, así que vive en un solo lugar.
+const clubToForm = (club: Club) => ({
+  name: club.name,
+  logoUrl: club.logoUrl ?? '',
+  description: club.description ?? '',
+  foundedYear: club.foundedYear?.toString() ?? '',
+})
+
 // Output properties: el formulario no guarda nada por su cuenta,
 // avisa hacia arriba y ClubList decide qué hacer con el resultado.
 interface ClubFormProps {
@@ -30,9 +40,9 @@ export default function ClubForm({ onAdd, onEdit }: ClubFormProps) {
 
   // Un solo objeto para todo el formulario, en vez de un useState
   // por campo. El handler genérico de abajo actualiza cualquier campo.
-  const [form, setForm] = useState({
-    name: clubFromState?.name ?? initialClubData.name,
-  })
+  const [form, setForm] = useState(
+    clubFromState ? clubToForm(clubFromState) : initialClubData,
+  )
   const [errors, setErrors] = useState(initialClubErrors)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -40,6 +50,7 @@ export default function ClubForm({ onAdd, onEdit }: ClubFormProps) {
   // hacer foco es una acción imperativa sobre el DOM y no se puede
   // expresar con una prop en el JSX. El valor sigue viniendo del estado.
   const nameRef = useRef<HTMLInputElement>(null)
+  const yearRef = useRef<HTMLInputElement>(null)
 
   // Fallback: si estamos editando y no llegó el state (F5 o link directo),
   // pedimos el club por su id.
@@ -47,7 +58,7 @@ export default function ClubForm({ onAdd, onEdit }: ClubFormProps) {
     if (!isEditing || clubFromState) return
 
     getClub(id, {
-      onSuccess: (club) => setForm({ name: club.name }),
+      onSuccess: (club) => setForm(clubToForm(club)),
       onError: (error) => {
         errorToast(error.message)
         navigate('/clubes', { replace: true })
@@ -59,7 +70,7 @@ export default function ClubForm({ onAdd, onEdit }: ClubFormProps) {
   // Además limpia el error de ese campo, así el borde rojo desaparece
   // apenas el usuario empieza a corregir.
   const handleInputChange = (
-    event: ChangeEvent<HTMLInputElement>,
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     attr: keyof typeof form,
   ) => {
     const { value } = event.target
@@ -80,12 +91,32 @@ export default function ClubForm({ onAdd, onEdit }: ClubFormProps) {
       return
     }
 
+    // El año vacío se manda como null (borrar), no como "": el backend
+    // rechaza un string en ese campo. Y validamos que sea entero porque
+    // Number("abc") da NaN, que al serializarse a JSON viaja como null
+    // y borraría el dato sin que el usuario se entere.
+    const typedYear = form.foundedYear.trim()
+    const foundedYear = typedYear === '' ? null : Number(typedYear)
+
+    if (foundedYear !== null && !Number.isInteger(foundedYear)) {
+      setErrors((prevErrors) => ({ ...prevErrors, foundedYear: true }))
+      yearRef.current?.focus()
+      return
+    }
+
     setIsSubmitting(true)
 
     // No navegamos acá: avisamos hacia arriba y ClubList navega recién
     // cuando el servidor confirmó. Si falla (por ej. 409 por nombre
     // duplicado), el usuario se queda en el formulario con el error.
-    const payload: CreateClubDto = { name: form.name.trim() }
+    // El logo y la descripción sí viajan como "": el backend los guarda
+    // como null, que es la forma de vaciar un campo opcional.
+    const payload: CreateClubDto = {
+      name: form.name.trim(),
+      logoUrl: form.logoUrl.trim(),
+      description: form.description.trim(),
+      foundedYear,
+    }
 
     if (isEditing) {
       onEdit(Number(id), payload)
@@ -138,6 +169,68 @@ export default function ClubForm({ onAdd, onEdit }: ClubFormProps) {
       {errors.name && (
         <p role="alert" className="mt-2 text-sm text-brand">
           El nombre del club es obligatorio.
+        </p>
+      )}
+
+      <div className="mt-4 flex flex-col gap-1">
+        <label htmlFor="logoUrl" className="text-sm font-medium">
+          URL del logo <span className="text-muted">(opcional)</span>
+        </label>
+        <input
+          id="logoUrl"
+          name="logoUrl"
+          type="url"
+          value={form.logoUrl}
+          onChange={(event) => handleInputChange(event, 'logoUrl')}
+          placeholder="https://ejemplo.com/logo.png"
+          className="rounded-lg border border-slate-300 px-3 py-2"
+        />
+      </div>
+
+      <div className="mt-4 flex flex-col gap-1">
+        <label htmlFor="description" className="text-sm font-medium">
+          Descripción <span className="text-muted">(opcional)</span>
+        </label>
+        {/* maxLength corta en el mismo límite que valida el backend. */}
+        <textarea
+          id="description"
+          name="description"
+          rows={3}
+          maxLength={1000}
+          value={form.description}
+          onChange={(event) => handleInputChange(event, 'description')}
+          placeholder="Breve reseña del club"
+          className="rounded-lg border border-slate-300 px-3 py-2"
+        />
+      </div>
+
+      <div className="mt-4 flex flex-col gap-1">
+        <label htmlFor="foundedYear" className="text-sm font-medium">
+          Año de fundación <span className="text-muted">(opcional)</span>
+        </label>
+        <input
+          ref={yearRef}
+          id="foundedYear"
+          name="foundedYear"
+          // type="text" en vez de number: las flechas del spinner no aportan
+          // (nadie carga un año de a uno) y con foco la rueda del mouse
+          // cambiaría el valor al scrollear. inputMode abre el teclado
+          // numérico en mobile; la validación real está en handleSubmit.
+          type="text"
+          inputMode="numeric"
+          maxLength={4}
+          value={form.foundedYear}
+          onChange={(event) => handleInputChange(event, 'foundedYear')}
+          placeholder="1930"
+          className={`rounded-lg border px-3 py-2 ${
+            errors.foundedYear ? 'border-brand' : 'border-slate-300'
+          }`}
+        />
+      </div>
+
+      {errors.foundedYear && (
+        <p role="alert" className="mt-2 text-sm text-brand">
+          El año de fundación tiene que ser un número entero.
         </p>
       )}
 
